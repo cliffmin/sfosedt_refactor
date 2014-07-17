@@ -1,8 +1,7 @@
 'use strict';
-var app = angular.module('refactorApp', []);
+var app = angular.module('defaultApp', []);
 
-
-app.service('getSFOS1', function() {
+app.service('getSFOS', function() {
     return {};
 });
 
