@@ -1,4 +1,7 @@
 'use strict';
+
+//services not working right now
+
 var app = angular.module('defaultApp', []);
 
 app.service('getSFOS', function() {
