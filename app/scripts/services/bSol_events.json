@@ -1,0 +1,127 @@
+    "DSN Allocation": [{
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "2005-294T07:27:05",
+            "End Time": "2005-294T07:44:05",
+            "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM",
+            "Y Offset": 73,
+            "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "CW 46191"
+            "Real Time Change": 0
+        }, {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "2005-294T20:15:59",
+            "End Time": "2005-294T20:32:59",
+            "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM",
+            "Y Offset": 73,
+            "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "CW 46191"
+            "Real Time Change": 0
+        }, {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "2005-295T02:35:04",
+            "End Time": "2005-295T02:55:04",
+            "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM",
+            "Y Offset": 13,
+            "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "CW 26200",
+            "Real Time Change": 0
+        }, {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "2005-295T07:12:06",
+            "End Time": "2005-295T07:26:06",
+            "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM"
+            "Y Offset": 73,
+            "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "CW 46201",
+            "Real Time Change": 0
+        } {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "2005-295T09:08:42",
+            "End Time": "2005-295T09:24:42",
+            "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM"
+            "Y Offset": 85,
+            "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "CW 46203",
+            "Real Time Change": 0
+        } {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "2005-296T03:14:39",
+            "End Time": "2005-296T03:34:39",
+            "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM"
+            "Y Offset": 13,
+            "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "CW 26210",
+            "Real Time Change": 0
+        } {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "End Time": "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM"
+            "Y Offset": "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "Real Time Change": 0
+        } {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "End Time": "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM"
+            "Y Offset": "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "Real Time Change": 0
+        } {
+            "Region": 09,
+            "Color": 0,
+            "Start Time": "End Time": "Show Time Flag": "Both Times",
+            "Time Display Format": "HHMM"
+            "Y Offset": "Font Typeface": "Helvetica",
+            "Font Size": 8,
+            "Text Position": "Automatic",
+            "Line Type": "Solid Line",
+            "Symbol Type": 0,
+            "Text": "Real Time Change": 0
+        }
+
+
+    ]
