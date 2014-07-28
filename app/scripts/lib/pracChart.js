@@ -20,9 +20,9 @@ var events = {
             "color": "blue"
         }]
     }
-//V 10 0 2013-085T18:09:03 2013-086T07:27:36 0 0 35 1024 8 0 1 0 "14 15 24 25 26" 0
-//V 10 0 2013-085T02:54:04 2013-085T11:20:12 0 0 133 1024 8 0 1 0 "45 34 43" 0
-//V 10 0 2013-085T10:27:18 2013-086T00:03:47 0 0 231 1024 8 0 1 0 "63 65 54 55" 0
+    //V 10 0 2013-085T18:09:03 2013-086T07:27:36 0 0 35 1024 8 0 1 0 "14 15 24 25 26" 0
+    //V 10 0 2013-085T02:54:04 2013-085T11:20:12 0 0 133 1024 8 0 1 0 "45 34 43" 0
+    //V 10 0 2013-085T10:27:18 2013-086T00:03:47 0 0 231 1024 8 0 1 0 "63 65 54 55" 0
 
 function main() {
     var chartSpec = {
@@ -40,9 +40,27 @@ function main() {
                         x: utc(d.start),
                         x2: utc(d.end),
                         y: d.ant,
+                        fill: d.color
+                    }
+                }
+            }, {
+                type: 'label',
+                from: 'events',
+                mappings: function(d) {
+                    return {
+                        x: utc(d.start),
+                        x2: utc(d.end),
+                        y: d.ant,
                         text: d.user,
                         fill: d.color
                     }
+                },
+                adjustments: function(item) {
+                    var size = Math.min(18, item.size);
+                    return {
+                        y: item.y + size * 0.05,
+                        size: size * 0.9
+                    };
                 }
             }]
         }]
