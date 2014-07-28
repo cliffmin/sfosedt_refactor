@@ -1,4 +1,5 @@
-    "DSN Allocation": [{
+{
+    "activities": [{
         "Region": 10,
         "Color": 0,
         "Start Time": "2013-085T23:30:00",
@@ -329,3 +330,4 @@
         "Text": "dc057a",
         "Real Time Change": 0
     }]
+}

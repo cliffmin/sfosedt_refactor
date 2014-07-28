@@ -1,4 +1,11 @@
+var utc = (function() {
+    var parser = d3.time.format.utc('%Y-%m-%dT%H:%M:%S.%LZ');
+    return function(d) {
+        return parser.parse(d);
+    };
+})();
 
-var myVar = $.getJSON(myObj);
+utc("2012-07-30T00:00:00.000Z");
 
-console.log(myVar);
+
+

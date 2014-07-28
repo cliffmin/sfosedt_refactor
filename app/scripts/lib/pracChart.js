@@ -1,38 +1,64 @@
+//events for the mar 26 - 27, using V records
+var events = {
+        "DSN Allocation Records": [{
+            "ant": "GOLDSTONE",
+            "user": "25 (0085)",
+            "start": "2013-085T18:09:03",
+            "end": "2013-086T00:03:47",
+            "color": "green"
+        }, {
+            "ant": "CANBERRA",
+            "user": "25 (0085)",
+            "start": "2013-085T23:30:00",
+            "end": "2013-086T07:00:00",
+            "color": "red"
+        }, {
+            "ant": "MADRID",
+            "user": "26 (0087)",
+            "start": "2013-085T02:54:04",
+            "end": "2013-085T11:20:12",
+            "color": "blue"
+        }]
+    }
+
 function main() {
-    console.log("executing main function");
-    $.getJSON('/scripts/services/chart.json').done(function(dsn) {
-        console.log(dsn);
-        var chart = new Timely.Chart({
-            element: $('#chart')[0],
-            data: {
-                default: dsn['activities']
-                .filter(function(d) {
-                    return d.user !== 'DSS';
-                })
-                .sort(function(a, b) {
-                    return utc(a.start) - utc(b.start);
-                })},
-            rows: [
-                _.extend(row('user', 'ant'), {
-                    title: 'DSN',
-                })
-            ],
-            width: 700,
-            height: 500
-        });
-        var $win = $(window);
+    var chartSpec = {
+        element: document.getElementById('chart'),
+        data: {
+            events: events['DSN Allocation Records']
+        },
+        rows: [{
+            title: "DSN Coverage",
+            layers: [{
+                type: 'rect',
+                from: 'events',
+                mappings: function(d) {
+                    return {
+                        x: utc(d.start),
+                        x2: utc(d.end),
+                        y: d.ant,
+                        text: d.user,
+                        fill: d.color
+                    }
+                }
+            }]
+        }]
+    }
 
-        function redraw() {
-            chart
-                .setWidth($win.width() - 15)
-                .setHeight($win.height() - 15)
-                .draw();
-        }
-        $win.resize(redraw);
+    var chart = new Timely.Chart(chartSpec);
+    var $win = $(window);
 
-        redraw();
-    });
-}
+    function redraw() {
+        chart.setWidth($win.width() - 15)
+            .setHeight($win.height() - 15)
+            .draw();
+    }
+
+    $win.resize(redraw);
+
+    redraw();
+};
+
 
 function row(category, label) {
     return {
@@ -80,8 +106,8 @@ function timeLabel(time, anchor) {
         maxItems: 50,
         mappings: function(d) {
             return {
-                text: d3.time.format.utc('%H:%M')(time(d)),
-                x: time(d)
+                text: d3.time.format.utc('%H:%M')(utc(d[time])),
+                x: utc(d[time])
             };
         },
         adjustments: function(d) {
@@ -102,7 +128,8 @@ function endOfTracking(d) {
 }
 
 var utc = (function() {
-    var parser = d3.time.format.utc('%Y-%m-%dT%H:%M:%S.%LZ');
+    var parser = d3.time.format.utc('%Y-%jT%H:%M:%S');
+    console.log(parser);
     return function(d) {
         return parser.parse(d);
     };
@@ -111,3 +138,6 @@ var utc = (function() {
 function offsetMinutes(date, minutes) {
     return new Date(date.getTime() + minutes * 60 * 1000)
 }
+
+//yaml markup
+//web server to serve file

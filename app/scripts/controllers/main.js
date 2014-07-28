@@ -10,5 +10,4 @@
 angular.module('defaultApp')
     .controller('MainCtrl', function($scope) {
         $scope.awesomeThings = ['string1', 'string2', 'string3'];
-        main();
 });
