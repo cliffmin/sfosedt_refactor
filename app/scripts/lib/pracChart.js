@@ -6,52 +6,53 @@ var events = {
             "DATA_SET_ID": "SFOS"
         },
         "EVENTS": [{
-            "type": "V",
-            "ant": "GOLDSTONE",
-            "user": "14 15 24 25 26",
-            "start": "2013-085T18:09:03",
-            "end": "2013-086T00:03:47",
-            "color": "green"
-        }, {
-            "type": "V",
-            "ant": "CANBERRA",
-            "user": "45 34 43",
-            "start": "2013-085T23:30:00",
-            "end": "2013-086T07:00:00",
-            "color": "red"
-        }, {
-            "type": "V",
-            "ant": "MADRID",
-            "user": "63 65 54 55",
-            "start": "2013-085T02:54:04",
-            "end": "2013-085T11:20:12",
-            "color": "pink"
-        },{
-            "type": "D",
-            "ant": "GOLDSTONE",
-            "user": "25 (0085)",
-            "start": "2013-085T23:30:00",
-            "end": "2013-086T07:00:00",
-        },{
-            "type": "D",
-            "ant": "CANBERRA",
-            "user": "45 (0085)",
-            "start": "2013-085T06:00:00",
-            "end": "2013-085T10:50:00",
-        },{
-            "type": "D",
-            "ant": "MADRID",
-            "user": "55 (0085)",
-            "start": "2013-085T17:35:00",
-            "end": "2013-085T23:40:00",
-        }
+                "type": "V",
+                "ant": "GOLDSTONE",
+                "user": "14 15 24 25 26",
+                "start": "2013-085T18:09:03",
+                "end": "2013-086T00:03:47",
+                "color": "green"
+            }, {
+                "type": "V",
+                "ant": "CANBERRA",
+                "user": "45 34 43",
+                "start": "2013-085T23:30:00",
+                "end": "2013-086T07:00:00",
+                "color": "red"
+            }, {
+                "type": "V",
+                "ant": "MADRID",
+                "user": "63 65 54 55",
+                "start": "2013-085T02:54:04",
+                "end": "2013-085T11:20:12",
+                "color": "pink"
+            }, {
+                "type": "D",
+                "ant": "CANBERRA",
+                "user": "25 (0085)",
+                "start": "2013-085T27:30:00",
+                "end": "2013-086T07:00:00",
+            }, {
+                "type": "D",
+                "ant": "MADRID",
+                "user": "45 (0085)",
+                "start": "2013-085T06:00:00",
+                "end": "2013-085T10:50:00",
+            }, {
+                "type": "D",
+                "ant": "GOLDSTONE",
+                "user": "55 (0085)",
+                "start": "2013-085T19:35:00",
+                "end": "2013-085T23:40:00",
+            }
 
         ]
     }
-//V 10 0 2013-085T18:09:03 2013-086T07:27:36 0 0 35 1024 8 0 1 0 "14 15 24 25 26" 0
-//V 10 0 2013-085T02:54:04 2013-085T11:20:12 0 0 133 1024 8 0 1 0 "45 34 43" 0
-//V 10 0 2013-085T10:27:18 2013-086T00:03:47 0 0 231 1024 8 0 1 0 "63 65 54 55" 0
-//V 10 0 2013-086T18:06:17 2013-087T07:25:11 0 0 35 1024 8 0 1 0 "14 15 24 25 26 " 0
+    //V 10 0 2013-085T18:09:03 2013-086T07:27:36 0 0 35 1024 8 0 1 0 "14 15 24 25 26" 0
+    //V 10 0 2013-085T02:54:04 2013-085T11:20:12 0 0 133 1024 8 0 1 0 "45 34 43" 0
+    //V 10 0 2013-085T10:27:18 2013-086T00:03:47 0 0 231 1024 8 0 1 0 "63 65 54 55" 0
+    //V 10 0 2013-086T18:06:17 2013-087T07:25:11 0 0 35 1024 8 0 1 0 "14 15 24 25 26 " 0
+
 function main() {
     var chartSpec = {
         element: document.getElementById('chart'),
@@ -89,25 +90,6 @@ function main() {
                     return {
                         y: item.y + size * 0.05,
                         size: size * 0.9
-                    };
-                }
-            }, {
-                type: 'whisker',
-                from: 'events',
-                mappings: function(d) {
-                    return {
-                        x: utc(d.start),
-                        x2: utc(d.end),
-                        y: d.ant,
-                        text: d.user,
-                        fill: d.color
-                    }
-                },
-                adjustments: function(item) {
-                    var size = Math.min(18, item.size);
-                    return {
-                        y: item.y + size * 0.05,
-                        size: size * 0.6
                     };
                 }
             }]
