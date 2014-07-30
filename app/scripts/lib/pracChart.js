@@ -1,58 +1,51 @@
 //events for the mar 26 - 27, using V records
-var dsnEvents = {
+var events = {
     "SETUP": {
         "MISSION_NAME": "DAWN",
         "SPACECRAFT_NAME": 203,
         "DATA_SET_ID": "SFOS"
     },
-    "EVENTS": [{
-            "type": "V",
-            "ant": "GOLDSTONE",
-            "user": "14 15 24 25 26",
-            "start": "2013-085T18:09:03",
-            "end": "2013-086T00:03:47",
-            "color": "green"
-        }, {
-            "type": "V",
-            "ant": "CANBERRA",
-            "user": "45 34 43",
-            "start": "2013-085T23:30:00",
-            "end": "2013-086T07:00:00",
-            "color": "red"
-        }, {
-            "type": "V",
-            "ant": "MADRID",
-            "user": "63 65 54 55",
-            "start": "2013-085T02:54:04",
-            "end": "2013-085T11:20:12",
-            "color": "pink"
-        }, {
-            "type": "D",
-            "ant": "CANBERRA",
-            "user": "25 (0085)",
-            "start": "2013-085T27:30:00",
-            "end": "2013-086T07:00:00",
-        }, {
-            "type": "D",
-            "ant": "MADRID",
-            "user": "45 (0085)",
-            "start": "2013-085T06:00:00",
-            "end": "2013-085T10:50:00",
-        }, {
-            "type": "D",
-            "ant": "GOLDSTONE",
-            "user": "55 (0085)",
-            "start": "2013-085T19:35:00",
-            "end": "2013-085T23:40:00",
-        }
-    ]
-    //V 10 0 2013-085T18:09:03 2013-086T07:27:36 0 0 35 1024 8 0 1 0 "14 15 24 25 26" 0
-    //V 10 0 2013-085T02:54:04 2013-085T11:20:12 0 0 133 1024 8 0 1 0 "45 34 43" 0
-    //V 10 0 2013-085T10:27:18 2013-086T00:03:47 0 0 231 1024 8 0 1 0 "63 65 54 55" 0
-    //V 10 0 2013-086T18:06:17 2013-087T07:25:11 0 0 35 1024 8 0 1 0 "14 15 24 25 26 " 0
-}
-var parameterEvents = {
-    "EVENTS": [{
+    "dsnEvents": [{
+        "type": "V",
+        "ant": "GOLDSTONE",
+        "user": "14 15 24 25 26",
+        "start": "2013-085T18:09:03",
+        "end": "2013-086T00:03:47",
+        "color": "green"
+    }, {
+        "type": "V",
+        "ant": "CANBERRA",
+        "user": "45 34 43",
+        "start": "2013-085T23:30:00",
+        "end": "2013-086T07:00:00",
+        "color": "red"
+    }, {
+        "type": "V",
+        "ant": "MADRID",
+        "user": "63 65 54 55",
+        "start": "2013-085T02:54:04",
+        "end": "2013-085T11:20:12",
+        "color": "pink"
+    }, {
+        "type": "D",
+        "ant": "CANBERRA",
+        "user": "25 (0085)",
+        "start": "2013-085T27:30:00",
+        "end": "2013-086T07:00:00",
+    }, {
+        "type": "D",
+        "ant": "MADRID",
+        "user": "45 (0085)",
+        "start": "2013-085T06:00:00",
+        "end": "2013-085T10:50:00",
+    }, {
+        "type": "D",
+        "ant": "GOLDSTONE",
+        "user": "55 (0085)",
+        "start": "2013-085T19:35:00",
+        "end": "2013-085T23:40:00",
+    }],
+    "parameterEvents": [{
         "symbol": null,
         "state": "TWTA(1)",
         "time": "2013-085T03:15:39",
@@ -83,7 +76,13 @@ var parameterEvents = {
         "time": "2013-085T21:25:24",
         "text": "EARTHPNT OFF | OFF"
     }]
-};
+
+    //V 10 0 2013-085T18:09:03 2013-086T07:27:36 0 0 35 1024 8 0 1 0 "14 15 24 25 26" 0
+    //V 10 0 2013-085T02:54:04 2013-085T11:20:12 0 0 133 1024 8 0 1 0 "45 34 43" 0
+    //V 10 0 2013-085T10:27:18 2013-086T00:03:47 0 0 231 1024 8 0 1 0 "63 65 54 55" 0
+    //V 10 0 2013-086T18:06:17 2013-087T07:25:11 0 0 35 1024 8 0 1 0 "14 15 24 25 26 " 0
+}
+
 
 // P 06 0 2013-085T03:15:39 0 0 08 1024 8 1 "OWLT 0:21:35" "0:21:35" 3 0
 // P 06 0 2013-085T06:00:00 0 9 08 1024 8 0 "OWLT 0:21:36" "0:21:36" 3 0
@@ -98,12 +97,12 @@ var parameterEvents = {
 // P 06 0 2013-085T22:10:24 0 36 08 1024 8 0 "EARTHPNT ON" "ON" 4 0
 // P 06 0 2013-085T21:25:24 0 27 08 1024 8 1 "EARTHPNT OFF" "OFF" 4 0
 
-function spacecraft() {
+function main() {
     var chartSpec = {
         element: document.getElementById('spacecraft'),
         data: {
-            parameterEvents: parameterEvents['EVENTS'],
-            dsnEvents: dsnEvents['EVENTS']
+            parameterEvents: events['parameterEvents'],
+            dsnEvents: events['dsnEvents']
         },
         rows: [{
                 title: "Spacecraft States",
