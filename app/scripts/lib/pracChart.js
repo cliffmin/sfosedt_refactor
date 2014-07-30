@@ -3,7 +3,8 @@ var events = {
     "SETUP": {
         "MISSION_NAME": "DAWN",
         "SPACECRAFT_NAME": 203,
-        "DATA_SET_ID": "SFOS"
+        "DATA_SET_ID": "SFOS",
+        "TIME": "TUESDAY MARCH 26, 2013 - MARCH 27, 2013"
     },
     "dsnEvents": [{
         "type": "V",
@@ -75,14 +76,24 @@ var events = {
         "state": "EARTHPNT",
         "time": "2013-085T21:25:24",
         "text": "EARTHPNT OFF | OFF"
+    }],
+    "modeEvents": [{
+        "state": "MODE",
+        "time": "2013-086T00:05:08",
+        "text": "Mode ANOM_10 | ANOM_10"
+    }, {
+        "state": "MODE",
+        "time": "2013-086T13:46:47",
+        "text": "Mode ANOM_10 | ANOM_10"
     }]
-
     //V 10 0 2013-085T18:09:03 2013-086T07:27:36 0 0 35 1024 8 0 1 0 "14 15 24 25 26" 0
     //V 10 0 2013-085T02:54:04 2013-085T11:20:12 0 0 133 1024 8 0 1 0 "45 34 43" 0
     //V 10 0 2013-085T10:27:18 2013-086T00:03:47 0 0 231 1024 8 0 1 0 "63 65 54 55" 0
     //V 10 0 2013-086T18:06:17 2013-087T07:25:11 0 0 35 1024 8 0 1 0 "14 15 24 25 26 " 0
 }
 
+// P 08 0 2013-086T00:05:08 0 0 08 1024 8 1 "Mode ANOM_10" "ANOM_10" 11 0
+// P 08 0 2013-086T13:46:47 0 0 08 1024 8 1 "Mode ANOM_10" "ANOM_10" 11 0
 
 // P 06 0 2013-085T03:15:39 0 0 08 1024 8 1 "OWLT 0:21:35" "0:21:35" 3 0
 // P 06 0 2013-085T06:00:00 0 9 08 1024 8 0 "OWLT 0:21:36" "0:21:36" 3 0
@@ -99,17 +110,18 @@ var events = {
 
 function main() {
     var chartSpec = {
-        element: document.getElementById('spacecraft'),
+        element: document.getElementById('chart'),
         data: {
             parameterEvents: events['parameterEvents'],
-            dsnEvents: events['dsnEvents']
+            dsnEvents: events['dsnEvents'],
+            modeEvents: events['modeEvents']
         },
         rows: [{
                 title: "Spacecraft States",
                 layers: [{
                     type: 'symbol',
                     color: "blue",
-                    shape: 'triangle-up',
+                    shape: 'diamond',
                     from: 'parameterEvents',
                     mappings: function(d) {
                         return {
@@ -129,6 +141,46 @@ function main() {
                 }, {
                     type: 'label',
                     from: 'parameterEvents',
+                    mappings: function(d) {
+                        return {
+                            x: utc(d.time),
+                            y: d.state,
+                            text: d.text,
+                            fill: d.color
+                        }
+                    },
+                    adjustments: function(item) {
+                        var size = Math.min(18, item.size);
+                        return {
+                            y: item.y + size * 0.05,
+                            size: size * 0.9
+                        };
+                    }
+                }]
+            }, {
+                title: "TLM Output Mode",
+                layers: [{
+                    type: 'symbol',
+                    shape: 'diamond',
+                    from: 'modeEvents',
+                    mappings: function(d) {
+                        return {
+                            x: utc(d.time),
+                            y: d.state,
+                            text: d.text,
+                            fill: d.color
+                        }
+                    },
+                    adjustments: function(item) {
+                        var size = Math.min(18, item.size);
+                        return {
+                            y: item.y + size * 0.05,
+                            size: size * 0.9
+                        };
+                    }
+                }, {
+                    type: 'label',
+                    from: 'modeEvents',
                     mappings: function(d) {
                         return {
                             x: utc(d.time),
@@ -178,7 +230,8 @@ function main() {
                         };
                     }
                 }]
-            }
+            },
+
 
         ]
     }
@@ -195,64 +248,6 @@ function main() {
 
     redraw();
 };
-
-// function dsn() {
-//     var chartSpec = {
-//         element: document.getElementById('dsn'),
-//         data: {
-//             events: dsnEvents['EVENTS']
-//         },
-//         rows: [{
-//             title: "DSN Coverage",
-//             height: 0.8,
-//             layers: [{
-//                 type: 'rect',
-//                 from: 'events',
-//                 mappings: function(d) {
-//                     return {
-//                         x: utc(d.start),
-//                         x2: utc(d.end),
-//                         y: d.ant,
-//                         fill: d.color
-//                     }
-//                 }
-//             }, {
-//                 type: 'label',
-//                 from: 'events',
-//                 mappings: function(d) {
-//                     return {
-//                         x: utc(d.start),
-//                         x2: utc(d.end),
-//                         y: d.ant,
-//                         text: d.user,
-//                         fill: d.color
-//                     }
-//                 },
-//                 adjustments: function(item) {
-//                     var size = Math.min(18, item.size);
-//                     return {
-//                         y: item.y + size * 0.05,
-//                         size: size * 0.9
-//                     };
-//                 }
-//             }]
-//         }]
-//     }
-
-//     var chart = new Timely.Chart(chartSpec);
-//     var $win = $(window);
-
-//     function redraw() {
-//         chart.setWidth($win.width() - 50)
-//             .setHeight($win.height() - 400)
-//             .draw();
-//     }
-
-//     $win.resize(redraw);
-
-//     redraw();
-// };
-
 
 
 function row(category, label) {
