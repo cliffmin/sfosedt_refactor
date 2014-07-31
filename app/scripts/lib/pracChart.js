@@ -1,4 +1,4 @@
-//events for the mar 26 - 27, using V records
+//events for the mar 26 - 27
 var events = {
     "SETUP": {
         "MISSION_NAME": "DAWN",
@@ -108,7 +108,12 @@ var events = {
 // P 06 0 2013-085T22:10:24 0 36 08 1024 8 0 "EARTHPNT ON" "ON" 4 0
 // P 06 0 2013-085T21:25:24 0 27 08 1024 8 1 "EARTHPNT OFF" "OFF" 4 0
 
+
+//split into each row, with their respective layers and mappings. Where does d var
+//come from?
+
 function main() {
+    document.getElementById('header').innerHTML = events.SETUP['TIME'];
     var chartSpec = {
         element: document.getElementById('chart'),
         data: {
@@ -199,6 +204,12 @@ function main() {
                 }]
             }, {
                 title: "DSN Coverage",
+                mappings: function(d) {
+                    return {
+                        x: utc(d.start),
+                        x2: utc(d.end)
+                    };
+                },
                 layers: [{
                     type: 'rect',
                     from: 'dsnEvents',
@@ -227,6 +238,25 @@ function main() {
                         return {
                             y: item.y + size * 0.05,
                             size: size * 0.9
+                        };
+                    }
+                }, {
+                    type: 'label',
+                    from: 'dsnEvents',
+                    anchor: 'left',
+                    fill: 'none',
+                    maxItems: 50,
+                    mappings: function(d) {
+                        return {
+                            text: d3.time.format.utc('%H:%M')(utc(d.start)),
+                            x: utc(d.start),
+                            y: d.ant
+                        };
+                    },
+                    adjustments: function(d) {
+                        return {
+                            // Slightly shrink the start/end times relative to the main labels
+                            size: d.size * 0.8,
                         };
                     }
                 }]
@@ -268,23 +298,21 @@ function row(category, label) {
             };
         },
         layers: [{
-                type: 'rect',
-                stroke: 'white',
-                mappings: function(d) {
-                    return {
-                        x: utc(d.start),
-                        x2: utc(d.end)
-                    };
-                }
-            }, {
-                type: 'whisker'
-            }, { // main labels
-                type: 'label',
-                stroke: 'black'
-            },
-            timeLabel(startOfTracking, 'right'), // start times
-            timeLabel(endOfTracking, 'left') // end times
-        ]
+            type: 'rect',
+            stroke: 'white',
+            mappings: function(d) {
+                return {
+                    x: utc(d.start),
+                    x2: utc(d.end)
+                };
+            }
+        }, {
+            type: 'whisker'
+        }, { // main labels
+            type: 'label',
+            stroke: 'black'
+
+        }, ]
     };
 }
 
@@ -296,8 +324,8 @@ function timeLabel(time, anchor) {
         maxItems: 50,
         mappings: function(d) {
             return {
-                text: d3.time.format.utc('%H:%M')(utc(d[time])),
-                x: utc(d[time])
+                text: d3.time.format.utc('%H:%M')(utc(time)),
+                x: utc(time)
             };
         },
         adjustments: function(d) {
